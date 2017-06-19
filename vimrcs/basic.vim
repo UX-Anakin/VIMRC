@@ -47,6 +47,8 @@
 set history=500
 
 " Enable filetype plugins
+syntax on
+filetype on
 filetype plugin on
 filetype indent on
 
@@ -55,11 +57,37 @@ set autoread
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
-let mapleader = ","
-let g:mapleader = ","
+let mapleader = "\\"
+let g:mapleader = "\\"
 
 " Fast saving
 nmap <leader>w :w!<cr>
+
+" 定义快捷键到行首和行尾
+nmap LB 0
+nmap LE $
+
+" 设置快捷键将选中的文本快复制至系统剪切板
+vnoremap <leader>y "+y
+" 设置快捷键将系统剪切板内容粘贴至VIM
+nmap <leader>p "+p
+" 定义快捷键关闭当前分割窗口
+nmap <leader>q :q<CR>
+" 定义快捷键保存所有窗口并推出vim
+nmap <leader>wq :wa<CR>:q<CR>
+
+" 让配置变更立即生效
+autocmd BufWritePost $MYVIMRC source $MYVIMRC
+
+" 显示行号
+set number
+
+" 高亮显示当前行当前列
+set cursorline
+set cursorcolumn
+
+" 禁止折行
+set nowrap
 
 " :W sudo saves the file 
 " (useful for handling the permission-denied error)
@@ -104,6 +132,9 @@ set whichwrap+=<,>,h,l
 
 " Ignore case when searching
 set ignorecase
+
+" Close 兼容 model
+set nocompatible
 
 " When searching try to be smart about cases 
 set smartcase
@@ -157,6 +188,7 @@ try
 catch
 endtry
 
+" 配色方案
 set background=dark
 
 " Set extra options when running in GUI mode
@@ -277,6 +309,26 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 set laststatus=2
 
 " Format the status line
+
+" %f is replaced with the filename 
+" %= is switch to the right side,Tells Vim that everything coming after that should be aligned (as a whole) to the right instead of the left.
+" %y is replaced with the type of the file
+" %l is replaced with the Current line
+" %F displays the full path to the current file.
+" %L is replaced with the Total Lines
+" += form of set to split the definition across multiple lines,and add a comment on each line to document what each peice does.
+
+" : set statusline=%f -- " Path to the file
+" : set statusline+=\ -\ " Separator
+" : set statusline+=FileType: " Label
+" : set statusline+=%y   " Filetype of the file
+" : set statusline=%l    " Current line
+" : set statusline=%L    " Total lines
+" : set statusline=[%4l] " By default the padding space are added on the left side of the value.
+" ：set statusline=[%-4l] " use - to place padding on the right instead of the left.
+" : set statusline=[%04l] " Set vim to pad with zeros instead of spaces
+" : set statusline=%F     " displays the full path to the current file.
+" : set statusline=%f\ -\ FileType:\ %y  -- Like foo.markdown - FileType: [markdown]
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 
 
@@ -336,7 +388,8 @@ vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
 map <leader>cc :botright cope<cr>
 map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
 map <leader>n :cn<cr>
-map <leader>p :cp<cr>
+" 此处和前面快捷键设置冲突
+"map <leader>p :cp<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -359,7 +412,7 @@ map <leader>s? z=
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " Quickly open a buffer for scribble
-map <leader>q :e ~/buffer<cr>
+map <leader>o :e ~/buffer<cr>
 
 " Quickly open a markdown buffer for scribble
 map <leader>x :e ~/buffer.md<cr>
@@ -430,3 +483,14 @@ endfunction
 " if has("autocmd")
 "   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 "endif
+
+" indenLine -- A vim plugin to display the indention levels with thin vertical lines
+" https://github.com/Yggdroot/indentLine
+" Change Character Color
+let g:indentLine_setColors = 0
+" Change Indent Char
+let g:indentLine_char = '|'
+" enable by default
+let g:indentLine_enabled = 1
+" 
+
