@@ -313,3 +313,67 @@ Do following:
 * Remove `~/.vim_runtime`
 * Remove any lines that refernce `.vim_runtime` in your `~/.vimrc`
 
+## You're a programmer. Strive to be lazy
+* h j k l [left up down right]
+* ^E - scroll the window down
+* ^Y - scroll the window up
+* ^F - scroll down one page
+* ^B - scroll up one page
+* H - move cursor to the top of the window
+* M - move cursor to the middle of the window
+* L - move cursor to the bottom of the window
+* gg - go to top of file 
+* G - go to the end of file
+## Text objects and motions
+-- Text object
+* w - words
+* s - sentences
+* p - paragraphs
+* t - tags
+-- Motions
+* a - all
+* i - in
+* t - til
+* f - find forward
+* F - find backward
+## Combine with commands
+-- Commands
+* d - delete (also cut)
+* c - change(delete, then place in insert mode)
+* y - yank (copy)
+* v - visually select 
+-- {command}{text object or motion}
+* diw - delete in word
+* caw - change all word
+* yi) - yank all text inside parentheses
+* va" - visually select all inside doublequotes including doublequotes
+## Repetition The DOT command
+-- Repeat the last command 
+* dd/yy - delete/yank the current line
+* D/C - delete/change until end of line
+* ^/$ - move to the beginning/end of line
+* I/A - move to the beginning/end of line and insert
+* o/O - insert new line above/below current line and insert
+## Macro -- A sequence of commands recorded to a register
+-- Record a macro
+-> q{register}
+-> (do the things)
+-> q
+-- Play a macro
+-> @{register}
+
+## Plugins
+* vundle - plugin manager
+* nerdtree - file drawer
+* ctrlp - Fuzzy file finder
+* fugitive - git tool
+* syntastic - syntax checker/ linter
+--------------------------------------------------
+# Vim + Tmux
+-- brew install tmux 
+-- What is tmux?
+    -> Terminal multiplexer
+    -> View and control multiple consoles
+    -> Preconfigure environments
+* tmux new-session -s {session-name}
+* ~/.tmux.conf -- tmux configuration
